@@ -24,4 +24,10 @@ describe Primes do
 
     specify { expect(subject.run).to eql([2, 3, 5, 7, 11]) }
   end
+
+  context 'initialised with count: 10' do
+    subject { described_class.new(count: 10) }
+
+    specify { expect(subject.run).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
+  end
 end
