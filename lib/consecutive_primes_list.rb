@@ -3,7 +3,6 @@ require 'primes_list'
 class ConsecutivePrimesList
 
   def initialize
-    @primes_list = PrimesList.new
     @consecutive_primes_list = PrimesList.new
     @non_consecutive_tests = Set.new
     @non_consecutive_primes = Set.new
@@ -12,12 +11,10 @@ class ConsecutivePrimesList
   def <<(n)
     add_new_prime(n)
     add_new_test(n)
-    update_consecutive_primes_list
   end
 
   def add_non_prime(n)
     add_new_test(n)
-    update_consecutive_primes_list
   end
 
   def to_a
@@ -25,7 +22,7 @@ class ConsecutivePrimesList
   end
 
   def all_results
-    @primes_list.sort.to_a
+    @consecutive_primes_list.to_a + @non_consecutive_primes.sort
   end
 
   def largest_consecutive_test
@@ -46,24 +43,23 @@ class ConsecutivePrimesList
     @largest_consecutive_test = n
   end
 
+  def next_consecutive?(n)
+    largest_consecutive_test.nil? || n == largest_consecutive_test + 1
+  end
+
   def add_new_test(n)
-    if largest_consecutive_test.nil?
+    if next_consecutive?(n)
       self.largest_consecutive_test = n
-      remove_from_non_consecutive_tests(n)
-    elsif n == largest_consecutive_test + 1
-      self.largest_consecutive_test = n
-      remove_from_non_consecutive_tests(n)
+      update_consecutive_primes_list(n)
     else
       add_to_non_consecutive_tests(n)
     end
   end
 
   def add_new_prime(n)
-    @primes_list << n
-    if largest_consecutive_test.nil?
-      remove_from_non_consecutive_primes(n)
-    elsif n == largest_consecutive_test + 1
-      remove_from_non_consecutive_primes(n)
+    if next_consecutive?(n)
+      @consecutive_primes_list << n
+      update_consecutive_primes_list(n)
     else
       add_to_non_consecutive_primes(n)
     end
@@ -85,8 +81,22 @@ class ConsecutivePrimesList
     @non_consecutive_primes << n
   end
 
-  def update_consecutive_primes_list
-    @primes_list.to_a.select{ |n| n > ( @consecutive_primes_list.max || 0 ) && n <= largest_consecutive_test }.each { |n| @consecutive_primes_list << n }
+  def update_consecutive_primes_list(n)
+    test = n + 1
+
+    while !@non_consecutive_tests.empty? && test == @non_consecutive_tests.min
+      move_to_consecutive_tests(test)
+      test += 1
+    end
+  end
+
+  def move_to_consecutive_tests(n)
+    self.largest_consecutive_test = n
+    if @non_consecutive_primes.include?(n)
+      @consecutive_primes_list << n
+      remove_from_non_consecutive_primes(n)
+    end
+    remove_from_non_consecutive_tests(n)
   end
 
 end
