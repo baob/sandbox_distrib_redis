@@ -41,6 +41,31 @@ describe ConsecutivePrimesList do
       describe '#non_consecutive_primes' do
         specify { expect(subject.non_consecutive_primes).to be_empty }
       end
+
+      context 'and then 5 is added as a prime' do
+        let(:added_primes) { [5] }
+        before { added_primes.each { |p| subject << p } }
+
+        describe '#to_a' do
+          specify { expect(subject.to_a).to eql(initial_list + added_primes) }
+        end
+
+        describe '#all_results' do
+          specify { expect(subject.all_results).to eql(initial_list + added_primes) }
+        end
+
+        describe '#largest_consecutive_test' do
+          specify { expect(subject.largest_consecutive_test).to eql(added_primes.last) }
+        end
+
+        describe '#non_consecutive_tests' do
+          specify { expect(subject.non_consecutive_tests).to be_empty }
+        end
+
+        describe '#non_consecutive_primes' do
+          specify { expect(subject.non_consecutive_primes).to be_empty }
+        end
+      end
     end
 
     context 'and 5 is added as a prime' do
