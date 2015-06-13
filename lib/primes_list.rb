@@ -1,0 +1,3 @@
+class PrimesList < Array
+
+end

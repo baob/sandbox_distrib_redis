@@ -1,10 +1,12 @@
+require_relative 'primes_list'
+
 class Primes
 
   INITIAL_PRIME_LIST = [2].freeze
 
   def initialize(opts)
     @input_count = opts.fetch(:count)
-    @primes = []
+    @primes = opts[:primes] || PrimesList.new
   end
 
   def run
