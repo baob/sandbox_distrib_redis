@@ -15,6 +15,11 @@ class ConsecutivePrimesList
     update_consecutive_primes_list
   end
 
+  def add_non_prime(n)
+    add_new_test(n)
+    update_consecutive_primes_list
+  end
+
   def to_a
     @consecutive_primes_list.to_a
   end
