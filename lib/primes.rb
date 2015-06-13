@@ -28,8 +28,8 @@ class Primes
     test_index = 0
     divisor_found = false
 
-    while !divisor_found && test_index < @primes.count && @primes[test_index] <= limit
-      break if divisor_found = test.remainder(@primes[test_index]) == 0
+    while !divisor_found && test_index < @primes.test_set.count && @primes.test_set[test_index] <= limit
+      break if divisor_found = test.remainder(@primes.test_set[test_index]) == 0
       test_index += 1
     end
 
