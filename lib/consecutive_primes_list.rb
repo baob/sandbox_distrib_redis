@@ -25,7 +25,7 @@ class ConsecutivePrimesList
   end
 
   def all_results
-    @primes_list.to_a
+    @primes_list.sort.to_a
   end
 
   def largest_consecutive_test

@@ -68,8 +68,8 @@ describe ConsecutivePrimesList do
       end
     end
 
-    context 'and 5 is added as a prime' do
-      let(:added_primes) { [5] }
+    context 'and 7, 5 are added as a prime out-of-sequence' do
+      let(:added_primes) { [7, 5] }
       before { added_primes.each { |p| subject << p } }
 
       describe '#to_a' do
@@ -77,7 +77,7 @@ describe ConsecutivePrimesList do
       end
 
       describe '#all_results' do
-        specify { expect(subject.all_results).to eql(initial_list + added_primes) }
+        specify { expect(subject.all_results).to eql(initial_list + added_primes.sort) }
       end
 
       describe '#largest_consecutive_test' do
@@ -85,11 +85,11 @@ describe ConsecutivePrimesList do
       end
 
       describe '#non_consecutive_tests' do
-        specify { expect(subject.non_consecutive_tests).to eql(added_primes) }
+        specify { expect(subject.non_consecutive_tests).to match_array(added_primes) }
       end
 
       describe '#non_consecutive_primes' do
-        specify { expect(subject.non_consecutive_primes).to eql(added_primes) }
+        specify { expect(subject.non_consecutive_primes).to match_array(added_primes) }
       end
     end
 
