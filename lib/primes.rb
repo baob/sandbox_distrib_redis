@@ -4,26 +4,22 @@ class Primes
 
   def initialize(opts)
     @input_count = opts.fetch(:count)
+    @primes = []
   end
 
   def run
-    @primes = INITIAL_PRIME_LIST.dup
-    @primes << next_prime while @primes.count < @input_count
-    @primes
-  end
+    INITIAL_PRIME_LIST.each { |n| @primes << n }
 
-  private
-
-  def next_prime
     test = @primes.last + 1
-
-    while true
-      break if is_prime?(test)
+    while @primes.count < @input_count
+      @primes << test if is_prime?(test)
       test += 1
     end
 
-    test
+    @primes.to_a
   end
+
+  private
 
   def is_prime?(test)
     limit = Math.sqrt(test.to_f).floor
