@@ -7,6 +7,18 @@ describe ConsecutivePrimesList do
     pl
   end
 
+  context 'initialised with 3, 2' do
+    let(:initial_list) { [3, 2] }
+
+    describe '#to_a' do
+      specify { expect(subject.to_a).to eql(initial_list.sort) }
+    end
+
+    describe '#all_results' do
+      specify { expect(subject.all_results).to eql(initial_list.sort) }
+    end
+  end
+
   context 'initialised with 2, 3' do
     let(:initial_list) { [2, 3] }
 
