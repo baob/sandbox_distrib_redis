@@ -26,7 +26,7 @@ class ConsecutivePrimesList
   end
 
   def largest_consecutive_test
-    @largest_consecutive_test
+    @largest_consecutive_test ||= 1
   end
 
   def non_consecutive_tests
