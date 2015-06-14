@@ -4,4 +4,8 @@ class PrimesList < Array
     self
   end
 
+  def add_non_prime(n)
+    nil
+  end
+
 end

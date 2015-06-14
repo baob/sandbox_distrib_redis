@@ -1,4 +1,5 @@
 require 'primes'
+require 'consecutive_primes_list'
 
 describe Primes do
   context 'initialised with count: 1' do
@@ -30,4 +31,39 @@ describe Primes do
 
     specify { expect(subject.run).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
   end
+
+  context 'with ConsecutivePrimesList model' do
+    let(:model) { ConsecutivePrimesList }
+
+    context 'initialised with count: 1' do
+      subject { described_class.new(count: 1, model: model) }
+
+      specify { expect(subject.run).to eql([2]) }
+    end
+
+    context 'initialised with count: 2' do
+      subject { described_class.new(count: 2, model: model) }
+
+      specify { expect(subject.run).to eql([2, 3]) }
+    end
+
+    context 'initialised with count: 3' do
+      subject { described_class.new(count: 3, model: model) }
+
+      specify { expect(subject.run).to eql([2, 3, 5]) }
+    end
+
+    context 'initialised with count: 5' do
+      subject { described_class.new(count: 5, model: model) }
+
+      specify { expect(subject.run).to eql([2, 3, 5, 7, 11]) }
+    end
+
+    context 'initialised with count: 10' do
+      subject { described_class.new(count: 10, model: model) }
+
+      specify { expect(subject.run).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
+    end
+  end
+
 end
