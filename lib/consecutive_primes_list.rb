@@ -1,11 +1,12 @@
 require 'primes_list'
+require 'volatile_primes_list'
 
 class ConsecutivePrimesList
 
   def initialize
     @consecutive_primes_list = PrimesList.new
-    @non_consecutive_tests = PrimesList.new
-    @non_consecutive_primes = PrimesList.new
+    @non_consecutive_tests = VolatilePrimesList.new
+    @non_consecutive_primes = VolatilePrimesList.new
   end
 
   def <<(n)
