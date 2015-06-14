@@ -1,5 +1,6 @@
 require 'primes_list'
 require 'volatile_primes_list'
+require 'volatile_integer'
 
 class ConsecutivePrimesList
 
@@ -7,6 +8,7 @@ class ConsecutivePrimesList
     @consecutive_primes_list = PrimesList.new
     @non_consecutive_tests = VolatilePrimesList.new
     @non_consecutive_primes = VolatilePrimesList.new
+    @largest_consecutive_test = VolatileInteger.new(1)
   end
 
   def <<(n)
@@ -27,7 +29,7 @@ class ConsecutivePrimesList
   end
 
   def largest_consecutive_test
-    @largest_consecutive_test ||= 1
+    @largest_consecutive_test.to_i
   end
 
   def non_consecutive_tests
@@ -41,11 +43,11 @@ class ConsecutivePrimesList
   private
 
   def largest_consecutive_test=(n)
-    @largest_consecutive_test = n
+    @largest_consecutive_test.set(n)
   end
 
   def next_consecutive?(n)
-    largest_consecutive_test.nil? || n == largest_consecutive_test + 1
+    n == largest_consecutive_test + 1
   end
 
   def add_new_test(n)
