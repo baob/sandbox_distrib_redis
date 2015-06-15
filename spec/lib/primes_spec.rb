@@ -2,67 +2,49 @@ require 'primes'
 require 'consecutive_primes_list'
 
 describe Primes do
-  context 'initialised with count: 1' do
-    subject { described_class.new(count: 1) }
 
-    specify { expect(subject.run).to eql([2]) }
+  context 'initialised with count: 1' do
+    specify { expect(subject.run(1)).to eql([2]) }
   end
 
   context 'initialised with count: 2' do
-    subject { described_class.new(count: 2) }
-
-    specify { expect(subject.run).to eql([2, 3]) }
+    specify { expect(subject.run(2)).to eql([2, 3]) }
   end
 
   context 'initialised with count: 3' do
-    subject { described_class.new(count: 3) }
-
-    specify { expect(subject.run).to eql([2, 3, 5]) }
+    specify { expect(subject.run(3)).to eql([2, 3, 5]) }
   end
 
   context 'initialised with count: 5' do
-    subject { described_class.new(count: 5) }
-
-    specify { expect(subject.run).to eql([2, 3, 5, 7, 11]) }
+    specify { expect(subject.run(5)).to eql([2, 3, 5, 7, 11]) }
   end
 
   context 'initialised with count: 10' do
-    subject { described_class.new(count: 10) }
-
-    specify { expect(subject.run).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
+    specify { expect(subject.run(10)).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
   end
 
   context 'with ConsecutivePrimesList model' do
     let(:model) { ConsecutivePrimesList }
+    subject { described_class.new(model: model) }
 
     context 'initialised with count: 1' do
-      subject { described_class.new(count: 1, model: model) }
-
-      specify { expect(subject.run).to eql([2]) }
+      specify { expect(subject.run(1)).to eql([2]) }
     end
 
     context 'initialised with count: 2' do
-      subject { described_class.new(count: 2, model: model) }
-
-      specify { expect(subject.run).to eql([2, 3]) }
+      specify { expect(subject.run(2)).to eql([2, 3]) }
     end
 
     context 'initialised with count: 3' do
-      subject { described_class.new(count: 3, model: model) }
-
-      specify { expect(subject.run).to eql([2, 3, 5]) }
+      specify { expect(subject.run(3)).to eql([2, 3, 5]) }
     end
 
     context 'initialised with count: 5' do
-      subject { described_class.new(count: 5, model: model) }
-
-      specify { expect(subject.run).to eql([2, 3, 5, 7, 11]) }
+      specify { expect(subject.run(5)).to eql([2, 3, 5, 7, 11]) }
     end
 
     context 'initialised with count: 10' do
-      subject { described_class.new(count: 10, model: model) }
-
-      specify { expect(subject.run).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
+      specify { expect(subject.run(10)).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
     end
   end
 

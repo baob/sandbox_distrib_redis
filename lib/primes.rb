@@ -4,13 +4,13 @@ class Primes
 
   INITIAL_PRIME_LIST = [2].freeze
 
-  def initialize(opts)
-    @input_count = opts.fetch(:count)
+  def initialize(opts = {})
     @model = opts[:model] || PrimesList
     @primes = @model.new
   end
 
-  def run
+  def run(count)
+    @input_count = count
     INITIAL_PRIME_LIST.each { |n| @primes << n }
 
     test = @primes.to_a.last + 1
