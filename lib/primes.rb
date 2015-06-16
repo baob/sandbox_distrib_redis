@@ -16,14 +16,22 @@ class Primes
     test = @primes.to_a.last + 1
     while @primes.to_a.count < @input_count
       if is_prime?(test)
-        @primes << test
+        result_is_prime(test)
       else
-        @primes.add_non_prime(test)
+        result_is_not_prime(test)
       end
       test += 1
     end
 
     @primes.to_a
+  end
+
+  def result_is_prime(test)
+    @primes << test
+  end
+
+  def result_is_not_prime(test)
+    @primes.add_non_prime(test)
   end
 
   private
