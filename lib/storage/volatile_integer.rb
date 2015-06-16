@@ -1,5 +1,5 @@
 module Storage
-  class VolatileInteger
+  class IntegerStore
 
     def initialize(n, opts = {})
       @value = n

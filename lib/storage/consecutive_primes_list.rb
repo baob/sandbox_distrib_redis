@@ -10,7 +10,7 @@ module Storage
       @consecutive_primes_list = PrimesList.new
       @non_consecutive_tests = VolatilePrimesList.new
       @non_consecutive_primes = VolatilePrimesList.new
-      @largest_consecutive_test = VolatileInteger.new(1)
+      @largest_consecutive_test = IntegerStore.new(1)
     end
 
     def <<(n)
@@ -43,7 +43,7 @@ module Storage
     end
 
     def self.integer(*args)
-      VolatileInteger.new(*args)
+      IntegerStore.new(*args)
     end
 
     private

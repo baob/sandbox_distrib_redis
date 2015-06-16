@@ -6,7 +6,7 @@ module Storage
     end
 
     def self.integer(*args)
-      VolatileInteger.new(*args)
+      IntegerStore.new(*args)
     end
 
   end
