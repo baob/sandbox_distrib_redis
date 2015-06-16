@@ -14,16 +14,28 @@ class Primes
     INITIAL_PRIME_LIST.each { |n| @primes << n }
 
     test = @primes.to_a.last + 1
-    while @primes.to_a.count < @input_count
-      if is_prime?(test)
-        result_is_prime(test)
-      else
-        result_is_not_prime(test)
-      end
+    until have_enough_results?
+      make_new_test(test)
       test += 1
     end
 
     @primes.to_a
+  end
+
+  def make_new_test(test)
+    return if have_enough_results?
+    raise "aborting loop: caller.size is #{caller.size}" if caller.size > 200
+
+    test_result = is_prime?(test)
+    store_result(test_result, test)
+  end
+
+  def store_result(test_result, test)
+    if test_result
+      result_is_prime(test)
+    else
+      result_is_not_prime(test)
+    end
   end
 
   def result_is_prime(test)
@@ -35,6 +47,10 @@ class Primes
   end
 
   private
+
+  def have_enough_results?
+    @primes.to_a.count >= @input_count.to_i
+  end
 
   def is_prime?(candidate)
     test_index = 0
