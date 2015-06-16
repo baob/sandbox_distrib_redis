@@ -1,6 +1,6 @@
 require_relative 'primes_list'
 require_relative 'volatile_primes_list'
-require_relative 'volatile_integer'
+require_relative 'integer_store'
 
 module Storage
 
