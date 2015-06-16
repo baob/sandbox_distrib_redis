@@ -23,9 +23,6 @@ class Primes
   end
 
   def make_new_test(test)
-    return if have_enough_results?
-    raise "aborting loop: caller.size is #{caller.size}" if caller.size > 200
-
     test_result = is_prime?(test)
     store_result(test_result, test)
   end
