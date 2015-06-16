@@ -1,11 +1,11 @@
-require_relative 'primes_list'
+require_relative 'storage/primes_list'
 
 class Primes
 
   INITIAL_PRIME_LIST = [2].freeze
 
   def initialize(opts = {})
-    @model = opts[:model] || PrimesList
+    @model = opts[:model] || Storage::PrimesList
     @primes = @model.new
   end
 

@@ -1,3 +1,0 @@
-class VolatilePrimesList < Array
-
-end
