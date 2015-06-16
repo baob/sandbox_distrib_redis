@@ -1,7 +1,7 @@
 module Storage
   class VolatileInteger
 
-    def initialize(n)
+    def initialize(n, opts = {})
       @value = n
     end
 

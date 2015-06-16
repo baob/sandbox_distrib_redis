@@ -7,10 +7,10 @@ module Storage
   class ConsecutivePrimesList
 
     def initialize
-      @consecutive_primes_list = Storage::PrimesList.new
-      @non_consecutive_tests = Storage::VolatilePrimesList.new
-      @non_consecutive_primes = Storage::VolatilePrimesList.new
-      @largest_consecutive_test = Storage::VolatileInteger.new(1)
+      @consecutive_primes_list = PrimesList.new
+      @non_consecutive_tests = VolatilePrimesList.new
+      @non_consecutive_primes = VolatilePrimesList.new
+      @largest_consecutive_test = VolatileInteger.new(1)
     end
 
     def <<(n)
@@ -40,6 +40,10 @@ module Storage
 
     def non_consecutive_primes
       @non_consecutive_primes.to_a
+    end
+
+    def self.integer(*args)
+      VolatileInteger.new(*args)
     end
 
     private

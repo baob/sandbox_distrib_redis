@@ -5,5 +5,9 @@ module Storage
       nil
     end
 
+    def self.integer(*args)
+      VolatileInteger.new(*args)
+    end
+
   end
 end
