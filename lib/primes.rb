@@ -6,10 +6,10 @@ class Primes
 
   def initialize(opts = {})
     @model = opts[:model] || Storage::PrimesList
-    @primes = @model.new
   end
 
   def run(count)
+    @primes = @model.new
     @input_count = count
     INITIAL_PRIME_LIST.each { |n| @primes << n }
 
