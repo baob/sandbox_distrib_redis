@@ -20,4 +20,12 @@ shared_examples 'a primes finder' do
     specify { expect(subject.run(10)).to eql([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) }
   end
 
+  context 'initialised with count: 40' do
+    specify 'completes in less than 2 seconds' do
+      Timeout.timeout(2) do
+        subject.run(40)
+      end
+    end
+  end
+
 end
