@@ -38,6 +38,9 @@ class Primes
   end
 
   def result_is_prime(test)
+    if @primes.to_a.include?(test)
+      raise "Primes#result_is_prime is adding #{test} again ... WHY ?"
+    end
     @primes << test
   end
 
