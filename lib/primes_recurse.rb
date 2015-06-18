@@ -15,7 +15,7 @@ class PrimesRecurse < Primes
     @input_count = @model.integer(count, id: :input_count)
     @biggest_test_generated = @model.integer(@primes.to_a.last, id: :biggest_test_generated)
 
-    test = @biggest_test_generated.to_i + 1
+    test = biggest_test_generated + 1
 
     make_new_test(test)
 
@@ -27,7 +27,7 @@ class PrimesRecurse < Primes
     raise "aborting loop: caller.size is #{caller.size}" if caller.size > 200
 
     test_result = super
-    @biggest_test_generated.set(test)
+    self.biggest_test_generated = test
 
     if test_result
       new_test_limit = test**2 - 1
@@ -37,8 +37,16 @@ class PrimesRecurse < Primes
 
   private
 
+  def biggest_test_generated=(n)
+    @biggest_test_generated.set(n)
+  end
+
+  def biggest_test_generated
+    @biggest_test_generated.to_i
+  end
+
   def make_more_tests_to(new_test_limit)
-    test_start = @biggest_test_generated.to_i + 1
+    test_start = biggest_test_generated + 1
 
     if new_test_limit >= test_start
       (test_start..new_test_limit).each do |n|
