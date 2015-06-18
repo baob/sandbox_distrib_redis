@@ -33,8 +33,11 @@ class PrimesQueue < Primes
   end
 
   def queue_some_tests
-    new_test_limit = @primes.to_a.max**2 - 1
     make_more_tests_to(new_test_limit) unless have_enough_results?
+  end
+
+  def new_test_limit
+    (@primes.to_a.max + 1)**2 - 1
   end
 
   def queue_new_test(test)

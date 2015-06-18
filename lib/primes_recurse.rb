@@ -30,9 +30,12 @@ class PrimesRecurse < Primes
     self.biggest_test_generated = test
 
     if test_result
-      new_test_limit = test**2 - 1
       make_more_tests_to(new_test_limit) unless have_enough_results?
     end
+  end
+
+  def new_test_limit
+    (@primes.to_a.max + 1)**2 - 1
   end
 
   private
