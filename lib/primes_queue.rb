@@ -33,7 +33,8 @@ class PrimesQueue
   end
 
   def queue_some_tests
-    make_more_tests_to(biggest_test_possible) unless have_enough_results?
+    test_end = [biggest_test_generated + 10, biggest_test_possible].min
+    queue_more_tests_to(test_end)
   end
 
   def queue_new_test(test)
@@ -51,12 +52,11 @@ class PrimesQueue
 
   private
 
-  def make_more_tests_to(test_limit)
+  def queue_more_tests_to(test_limit)
     test_start = biggest_test_generated + 1
-    test_end = [biggest_test_generated + 10, test_limit].min
 
     if test_limit >= test_start
-      (test_start..test_end).each do |n|
+      (test_start..test_limit).each do |n|
         queue_new_test(n)
       end
     end

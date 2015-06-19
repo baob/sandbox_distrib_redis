@@ -25,8 +25,6 @@ class PrimesSeq
   def make_new_test(test)
     test_result = is_prime?(test)
     store_result(test_result, test)
-
-    test_result
   end
 
 end
