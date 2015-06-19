@@ -1,12 +1,12 @@
 require_relative 'storage/consecutive_primes_list'
 require_relative 'storage/primes_list'
-require_relative 'primes_seq'
+require_relative 'primes'
 
-class PrimesQueue < PrimesSeq
+class PrimesQueue
+  include Primes
 
   def initialize(opts = {})
-    opts[:model] ||= Storage::ConsecutivePrimesList
-    super
+    @model = opts[:model] || Storage::ConsecutivePrimesList
     @queued_tests = Storage::VolatilePrimesList.new
     @biggest_test_initial_value = @model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     @biggest_test_generated = @biggest_test_initial_value
@@ -28,16 +28,12 @@ class PrimesQueue < PrimesSeq
 
   def make_new_test(test)
     return if have_enough_results?
-
-    super
+    test_result = is_prime?(test)
+    store_result(test_result, test)
   end
 
   def queue_some_tests
-    make_more_tests_to(new_test_limit) unless have_enough_results?
-  end
-
-  def new_test_limit
-    (@primes.to_a.max + 1)**2 - 1
+    make_more_tests_to(biggest_test_possible) unless have_enough_results?
   end
 
   def queue_new_test(test)
@@ -55,19 +51,11 @@ class PrimesQueue < PrimesSeq
 
   private
 
-  def biggest_test_generated=(n)
-    @biggest_test_generated.set(n)
-  end
-
-  def biggest_test_generated
-    @biggest_test_generated.to_i
-  end
-
-  def make_more_tests_to(new_test_limit)
+  def make_more_tests_to(test_limit)
     test_start = biggest_test_generated + 1
-    test_end = [biggest_test_generated + 10, new_test_limit].min
+    test_end = [biggest_test_generated + 10, test_limit].min
 
-    if new_test_limit >= test_start
+    if test_limit >= test_start
       (test_start..test_end).each do |n|
         queue_new_test(n)
       end
