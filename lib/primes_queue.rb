@@ -7,7 +7,7 @@ class PrimesQueue
 
   def initialize(opts = {})
     @model = opts[:model] || Storage::ConsecutivePrimesList
-    @queued_tests = Storage::VolatilePrimesList.new
+    @queued_tests = Storage::IntegerQueue.new
     @biggest_test_initial_value = @model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     @biggest_test_generated = @biggest_test_initial_value
   end

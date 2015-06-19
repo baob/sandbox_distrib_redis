@@ -1,5 +1,5 @@
 require_relative 'primes_list'
-require_relative 'volatile_primes_list'
+require_relative 'integer_queue'
 require_relative 'integer_store'
 
 module Storage
@@ -8,8 +8,8 @@ module Storage
 
     def initialize
       @consecutive_primes_list = PrimesList.new
-      @non_consecutive_tests = VolatilePrimesList.new
-      @non_consecutive_primes = VolatilePrimesList.new
+      @non_consecutive_tests = IntegerQueue.new
+      @non_consecutive_primes = IntegerQueue.new
       @largest_consecutive_test = IntegerStore.new(1)
     end
 
