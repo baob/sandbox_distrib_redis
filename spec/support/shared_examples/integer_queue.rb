@@ -47,7 +47,7 @@ shared_examples 'an integer queue' do
       let(:initial_elements) { [222, 33, 4] }
 
       describe '#to_a' do
-        specify { expect(subject.to_a).to eql(initial_elements) }
+        specify { expect(subject.to_a).to match_array(initial_elements) }
       end
 
       describe '#sort' do
