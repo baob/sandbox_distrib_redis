@@ -1,8 +1,8 @@
 require_relative 'storage/consecutive_primes_list'
 require_relative 'storage/primes_list'
-require_relative 'primes'
+require_relative 'primes_seq'
 
-class PrimesQueue < Primes
+class PrimesQueue < PrimesSeq
 
   def initialize(opts = {})
     opts[:model] ||= Storage::ConsecutivePrimesList

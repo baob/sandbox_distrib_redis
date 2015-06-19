@@ -1,6 +1,6 @@
 require_relative 'storage/primes_list'
 
-class Primes
+class PrimesSeq
 
   INITIAL_PRIME_LIST = [2].freeze
 
