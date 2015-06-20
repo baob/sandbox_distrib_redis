@@ -8,7 +8,7 @@ module Primes
   attr_reader :storage_model_name, :list_model_name
 
   def have_enough_results?
-    @primes.to_a.count >= @input_count.to_i
+    @primes.count >= @input_count.to_i
   end
 
   def is_prime?(candidate)
@@ -16,8 +16,8 @@ module Primes
     test_value = nil
     divisor_found = false
 
-    while !divisor_found && test_index < @primes.to_a.count
-      test_value = @primes.to_a[test_index]
+    while !divisor_found && test_index < @primes.count
+      test_value = @primes[test_index]
       break if test_value.nil?
       break if test_value * test_value > candidate
       break if divisor_found = candidate.remainder(test_value) == 0
@@ -38,7 +38,7 @@ module Primes
   end
 
   def result_is_prime(test)
-    if @primes.to_a.include?(test)
+    if @primes.include?(test)
       raise "Primes#result_is_prime is adding #{test} again ... WHY ?"
     end
     @primes << test
@@ -59,7 +59,7 @@ module Primes
   end
 
   def biggest_test_possible
-    (@primes.to_a.max + 1)**2 - 1
+    (@primes.max + 1)**2 - 1
   end
 
   def biggest_test_generated=(n)

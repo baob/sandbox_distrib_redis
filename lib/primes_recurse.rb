@@ -12,7 +12,7 @@ class PrimesRecurse
     @primes = list_model
     INITIAL_PRIME_LIST.each { |n| @primes << n }
     @input_count = storage_model.integer(count, id: :input_count)
-    @biggest_test_generated = storage_model.integer(@primes.to_a.last, id: :biggest_test_generated)
+    @biggest_test_generated = storage_model.integer(@primes.last, id: :biggest_test_generated)
 
     test = biggest_test_generated + 1
 

@@ -1,3 +1,5 @@
+require 'pry'
+
 shared_examples 'common primes list behaviour' do
 
   specify { expect(subject).to respond_to(:add_non_prime) }
@@ -16,6 +18,18 @@ shared_examples 'common primes list behaviour' do
       specify 'can be called with one argument' do
         subject.add_non_prime(double('something').as_null_object)
       end
+    end
+
+    describe '#count' do
+      specify { expect(subject.count).to eql(initial_elements.count) }
+    end
+
+    describe '#last' do
+      specify { expect(subject.last).to eql(initial_elements.last) }
+    end
+
+    describe '#[]' do
+      specify { expect(subject[1]).to eql(initial_elements[1]) }
     end
   end
 

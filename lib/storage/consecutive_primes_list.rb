@@ -26,6 +26,26 @@ module Storage
       @consecutive_primes_list.to_a
     end
 
+    def count
+      @consecutive_primes_list.count
+    end
+
+    def last
+      @consecutive_primes_list.last
+    end
+
+    def [](index)
+      @consecutive_primes_list[index]
+    end
+
+    def include?(elem)
+      @consecutive_primes_list.include?(elem)
+    end
+
+    def max
+      @consecutive_primes_list.max
+    end
+
     def all_results
       to_a + @non_consecutive_primes.sort
     end

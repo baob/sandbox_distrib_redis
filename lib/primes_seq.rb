@@ -13,7 +13,7 @@ class PrimesSeq
     INITIAL_PRIME_LIST.each { |n| @primes << n }
     @input_count = storage_model.integer(count, id: :input_count)
 
-    test = @primes.to_a.last + 1
+    test = @primes.last + 1
     until have_enough_results?
       make_new_test(test)
       test += 1

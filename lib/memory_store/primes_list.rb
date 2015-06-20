@@ -17,5 +17,25 @@ module MemoryStore
       @array << elem
     end
 
+    def count
+      @array.count
+    end
+
+    def last
+      @array.last
+    end
+
+    def [](index)
+      @array[index]
+    end
+
+    def include?(elem)
+      @array.include?(elem)
+    end
+
+    def max
+      @array.max
+    end
+
   end
 end
