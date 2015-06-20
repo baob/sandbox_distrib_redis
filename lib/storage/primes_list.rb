@@ -1,5 +1,5 @@
 module Storage
-  class PrimesList # < Array
+  class PrimesList
 
     def initialize(opts = {})
       @array = []

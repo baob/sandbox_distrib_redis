@@ -10,17 +10,10 @@ module Storage
 
     def initialize(opts = {})
       @storage_model = opts[:storage_model] || MemoryStore
-      if @storage_model == RedisStore
-        @consecutive_primes_list = @storage_model.primes_list(id: :consecutive_primes_list)
-        @non_consecutive_tests = @storage_model.integer_queue(id: :non_consecutive_tests)
-        @non_consecutive_primes = @storage_model.integer_queue(id: :non_consecutive_primes)
-        @largest_consecutive_test = @storage_model.integer(1, id: :largest_consecutive_test)
-      else
-        @consecutive_primes_list = PrimesList.new
-        @non_consecutive_tests = IntegerQueue.new
-        @non_consecutive_primes = IntegerQueue.new
-        @largest_consecutive_test = IntegerStore.new(1)
-      end
+      @consecutive_primes_list = @storage_model.primes_list(id: :consecutive_primes_list)
+      @non_consecutive_tests = @storage_model.integer_queue(id: :non_consecutive_tests)
+      @non_consecutive_primes = @storage_model.integer_queue(id: :non_consecutive_primes)
+      @largest_consecutive_test = @storage_model.integer(1, id: :largest_consecutive_test)
     end
 
     def <<(n)
@@ -50,10 +43,6 @@ module Storage
 
     def non_consecutive_primes
       @non_consecutive_primes.to_a
-    end
-
-    def self.integer(*args)
-      IntegerStore.new(*args)
     end
 
     private
