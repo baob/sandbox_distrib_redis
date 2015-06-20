@@ -9,7 +9,8 @@ class PrimesQueue
 
   def initialize(opts = {})
     list_model_name = opts[:list_model] || :consecutive_primes_list
-    @storage_model = opts[:storage_model] || MemoryStore
+    storage_model_name = opts[:storage_model] || :memory_store
+    @storage_model = Module.const_get(storage_model_name.to_s.split('_').map(&:capitalize).join)
     @model = storage_model.send(list_model_name)
     @queued_tests = storage_model.integer_queue(id: :queued_tests)
     @biggest_test_initial_value = storage_model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)

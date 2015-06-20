@@ -8,7 +8,8 @@ class PrimesSeq
 
   def initialize(opts = {})
     list_model_name = opts[:list_model] || :consecutive_primes_list
-    @storage_model = opts[:storage_model] || MemoryStore
+    storage_model_name = opts[:storage_model] || :memory_store
+    @storage_model = Module.const_get(storage_model_name.to_s.split('_').map(&:capitalize).join)
     @model = storage_model.send(list_model_name)
   end
 
