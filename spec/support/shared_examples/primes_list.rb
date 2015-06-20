@@ -1,5 +1,3 @@
-require 'pry'
-
 shared_examples 'common primes list behaviour' do
 
   specify { expect(subject).to respond_to(:add_non_prime) }
