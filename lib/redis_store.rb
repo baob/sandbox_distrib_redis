@@ -4,6 +4,10 @@ require_relative 'redis_store/primes_list'
 
 module RedisStore
 
+  def self.consecutive_primes_list(opts = {})
+    Storage::ConsecutivePrimesList.new(opts.merge(storage_model: RedisStore))
+  end
+
   def self.integer(number, opts = {})
     IntegerStore.new(number, opts)
   end
