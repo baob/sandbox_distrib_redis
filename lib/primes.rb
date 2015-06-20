@@ -15,9 +15,10 @@ module Primes
     test_index = 0
     test_value = nil
     divisor_found = false
+    divisors_to_try = @primes.to_a
 
-    while !divisor_found && test_index < @primes.count
-      test_value = @primes[test_index]
+    while !divisor_found && test_index < divisors_to_try.count
+      test_value = divisors_to_try[test_index]
       break if test_value.nil?
       break if test_value * test_value > candidate
       break if divisor_found = candidate.remainder(test_value) == 0
