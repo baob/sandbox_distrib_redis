@@ -1,6 +1,11 @@
+require_relative 'storage/consecutive_primes_list'
+require_relative 'memory_store'
+
 module Primes
 
   INITIAL_PRIME_LIST = [2].freeze
+
+  attr_reader :storage_model_name, :list_model_name
 
   def have_enough_results?
     @primes.to_a.count >= @input_count.to_i
@@ -44,6 +49,14 @@ module Primes
   end
 
   private
+
+  def storage_model
+    @storage_model ||= Module.const_get(storage_model_name.to_s.split('_').map(&:capitalize).join)
+  end
+
+  def list_model
+    @list_model = storage_model.send(list_model_name)
+  end
 
   def biggest_test_possible
     (@primes.to_a.max + 1)**2 - 1
