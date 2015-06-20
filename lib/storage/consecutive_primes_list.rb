@@ -1,3 +1,4 @@
+require_relative '../redis_store'
 require_relative 'primes_list'
 require_relative 'integer_queue'
 require_relative 'integer_store'
@@ -6,11 +7,19 @@ module Storage
 
   class ConsecutivePrimesList
 
-    def initialize
-      @consecutive_primes_list = PrimesList.new
-      @non_consecutive_tests = IntegerQueue.new
-      @non_consecutive_primes = IntegerQueue.new
-      @largest_consecutive_test = IntegerStore.new(1)
+    def initialize(opts = {})
+      @storage_model = opts[:storage_model] || Storage
+      if @storage_model == RedisStore
+        @consecutive_primes_list = @storage_model.primes_list(id: :consecutive_primes_list)
+        @non_consecutive_tests = @storage_model.integer_queue(id: :non_consecutive_tests)
+        @non_consecutive_primes = @storage_model.integer_queue(id: :non_consecutive_primes)
+        @largest_consecutive_test = @storage_model.integer(1, id: :largest_consecutive_test)
+      else
+        @consecutive_primes_list = PrimesList.new
+        @non_consecutive_tests = IntegerQueue.new
+        @non_consecutive_primes = IntegerQueue.new
+        @largest_consecutive_test = IntegerStore.new(1)
+      end
     end
 
     def <<(n)

@@ -5,15 +5,24 @@ require_relative 'primes'
 class PrimesQueue
   include Primes
 
+  attr_reader :storage_model
+
   def initialize(opts = {})
     @model = opts[:model] || Storage::ConsecutivePrimesList
-    @queued_tests = Storage::IntegerQueue.new
-    @biggest_test_initial_value = @model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+    @storage_model = opts[:storage_model] || Storage
+    if @storage_model == RedisStore
+      @queued_tests = @storage_model.integer_queue(id: :queued_tests)
+      @biggest_test_initial_value = @storage_model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+    else
+      @queued_tests = Storage::IntegerQueue.new
+      @biggest_test_initial_value = @model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+    end
     @biggest_test_generated = @biggest_test_initial_value
   end
 
   def run(count)
-    @primes = @model.new
+    @primes = @model.new(storage_model: storage_model)
+    # @primes = @model.new
     @biggest_test_generated = @biggest_test_initial_value
     INITIAL_PRIME_LIST.each { |n| @primes << n }
     @input_count = @model.integer(count, id: :input_count)

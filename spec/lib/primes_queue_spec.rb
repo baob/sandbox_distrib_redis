@@ -1,5 +1,6 @@
 require 'primes_queue'
 require 'storage/primes_list'
+require 'redis_store'
 
 describe PrimesQueue do
 
@@ -8,6 +9,13 @@ describe PrimesQueue do
   context 'with PrimesList model' do
     let(:model) { Storage::PrimesList }
     subject { described_class.new(model: model) }
+
+    it_behaves_like 'a primes finder'
+  end
+
+  context 'with a redis storage model' do
+    let(:storage_model) { RedisStore }
+    subject { described_class.new(storage_model: storage_model) }
 
     it_behaves_like 'a primes finder'
   end
