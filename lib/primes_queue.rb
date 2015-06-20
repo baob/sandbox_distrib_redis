@@ -17,7 +17,6 @@ class PrimesQueue
 
   def run(count)
     @primes = @model.new(storage_model: storage_model)
-    # @primes = @model.new
     @biggest_test_generated = @biggest_test_initial_value
     INITIAL_PRIME_LIST.each { |n| @primes << n }
     @input_count = storage_model.integer(count, id: :input_count)

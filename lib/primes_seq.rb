@@ -4,15 +4,17 @@ require_relative 'primes'
 class PrimesSeq
   include Primes
 
+  attr_reader :storage_model
+
   def initialize(opts = {})
     @model = opts[:model] || Storage::PrimesList
     @storage_model = opts[:storage_model] || MemoryStore
   end
 
   def run(count)
-    @primes = @model.new
+    @primes = @model.new(storage_model: storage_model)
     INITIAL_PRIME_LIST.each { |n| @primes << n }
-    @input_count = @storage_model.integer(count, id: :input_count)
+    @input_count = storage_model.integer(count, id: :input_count)
 
     test = @primes.to_a.last + 1
     until have_enough_results?
