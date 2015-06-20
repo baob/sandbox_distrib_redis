@@ -40,6 +40,13 @@ guard :rspec, cmd: "bundle exec rspec", all_after_pass: true, all_on_start: true
   ruby = dsl.ruby
   dsl.watch_spec_files_for(ruby.lib_files)
 
+  # The common primes methods used by everything
+  Dir[ "#{rspec.spec_dir}/lib/primes*_spec.rb" ].each do |spec|
+    watch(%r{^lib/primes.rb$}) { spec }
+    watch(%r{^lib/memory_store.rb$}) { spec }
+    watch(%r{^lib/redis_store.rb$}) { spec }
+  end
+
   # Rails files
   rails = dsl.rails(view_extensions: %w(erb haml slim))
   dsl.watch_spec_files_for(rails.app_files)
