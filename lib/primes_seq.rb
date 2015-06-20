@@ -6,12 +6,13 @@ class PrimesSeq
 
   def initialize(opts = {})
     @model = opts[:model] || Storage::PrimesList
+    @storage_model = opts[:storage_model] || MemoryStore
   end
 
   def run(count)
     @primes = @model.new
     INITIAL_PRIME_LIST.each { |n| @primes << n }
-    @input_count = @model.integer(count, id: :input_count)
+    @input_count = @storage_model.integer(count, id: :input_count)
 
     test = @primes.to_a.last + 1
     until have_enough_results?

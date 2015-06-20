@@ -1,4 +1,5 @@
 require_relative '../redis_store'
+require_relative '../memory_store'
 require_relative 'primes_list'
 require_relative 'integer_queue'
 require_relative 'integer_store'
@@ -8,7 +9,7 @@ module Storage
   class ConsecutivePrimesList
 
     def initialize(opts = {})
-      @storage_model = opts[:storage_model] || Storage
+      @storage_model = opts[:storage_model] || MemoryStore
       if @storage_model == RedisStore
         @consecutive_primes_list = @storage_model.primes_list(id: :consecutive_primes_list)
         @non_consecutive_tests = @storage_model.integer_queue(id: :non_consecutive_tests)

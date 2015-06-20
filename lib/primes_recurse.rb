@@ -5,15 +5,18 @@ require_relative 'primes'
 class PrimesRecurse
   include Primes
 
+  attr_reader :storage_model
+
   def initialize(opts = {})
     @model = opts[:model] || Storage::ConsecutivePrimesList
+    @storage_model = opts[:storage_model] || MemoryStore
   end
 
   def run(count)
     @primes = @model.new
     INITIAL_PRIME_LIST.each { |n| @primes << n }
-    @input_count = @model.integer(count, id: :input_count)
-    @biggest_test_generated = @model.integer(@primes.to_a.last, id: :biggest_test_generated)
+    @input_count = storage_model.integer(count, id: :input_count)
+    @biggest_test_generated = storage_model.integer(@primes.to_a.last, id: :biggest_test_generated)
 
     test = biggest_test_generated + 1
 

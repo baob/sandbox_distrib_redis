@@ -9,13 +9,13 @@ class PrimesQueue
 
   def initialize(opts = {})
     @model = opts[:model] || Storage::ConsecutivePrimesList
-    @storage_model = opts[:storage_model] || Storage
+    @storage_model = opts[:storage_model] || MemoryStore
     if @storage_model == RedisStore
-      @queued_tests = @storage_model.integer_queue(id: :queued_tests)
-      @biggest_test_initial_value = @storage_model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+      @queued_tests = storage_model.integer_queue(id: :queued_tests)
+      @biggest_test_initial_value = storage_model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     else
       @queued_tests = Storage::IntegerQueue.new
-      @biggest_test_initial_value = @model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+      @biggest_test_initial_value = storage_model.integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     end
     @biggest_test_generated = @biggest_test_initial_value
   end
@@ -25,7 +25,7 @@ class PrimesQueue
     # @primes = @model.new
     @biggest_test_generated = @biggest_test_initial_value
     INITIAL_PRIME_LIST.each { |n| @primes << n }
-    @input_count = @model.integer(count, id: :input_count)
+    @input_count = storage_model.integer(count, id: :input_count)
 
     until have_enough_results?
       queue_some_tests

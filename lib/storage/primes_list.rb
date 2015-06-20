@@ -17,9 +17,5 @@ module Storage
       @array << elem
     end
 
-    def self.integer(*args)
-      IntegerStore.new(*args)
-    end
-
   end
 end
