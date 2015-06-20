@@ -1,4 +1,4 @@
-module Storage
+module MemoryStore
   class IntegerStore
 
     def initialize(n, opts = {})

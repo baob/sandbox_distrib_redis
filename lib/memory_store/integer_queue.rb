@@ -1,4 +1,4 @@
-module Storage
+module MemoryStore
   class IntegerQueue
 
     def initialize(opts ={})

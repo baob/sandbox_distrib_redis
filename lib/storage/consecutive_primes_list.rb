@@ -1,8 +1,5 @@
 require_relative '../redis_store'
 require_relative '../memory_store'
-require_relative 'primes_list'
-require_relative 'integer_queue'
-require_relative 'integer_store'
 
 module Storage
 

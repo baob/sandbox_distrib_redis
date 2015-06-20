@@ -1,5 +1,5 @@
 require 'primes_queue'
-require 'storage/primes_list'
+require 'memory_store'
 require 'redis_store'
 
 describe PrimesQueue do

@@ -1,5 +1,5 @@
 require_relative 'storage/consecutive_primes_list'
-require_relative 'storage/primes_list'
+require_relative 'memory_store'
 require_relative 'primes'
 
 class PrimesRecurse

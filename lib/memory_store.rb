@@ -1,6 +1,6 @@
-require_relative 'storage/integer_store'
-require_relative 'storage/integer_queue'
-require_relative 'storage/primes_list'
+require_relative 'memory_store/integer_store'
+require_relative 'memory_store/integer_queue'
+require_relative 'memory_store/primes_list'
 
 module MemoryStore
 
@@ -9,15 +9,15 @@ module MemoryStore
   end
 
   def self.integer(number, opts = {})
-    Storage::IntegerStore.new(number, opts)
+    IntegerStore.new(number, opts)
   end
 
   def self.integer_queue(opts = {})
-    Storage::IntegerQueue.new(opts)
+    IntegerQueue.new(opts)
   end
 
   def self.primes_list(opts = {})
-    Storage::PrimesList.new(opts)
+    PrimesList.new(opts)
   end
 
 end

@@ -1,6 +1,6 @@
-require_relative '../../../lib/storage/integer_queue'
+require_relative '../../../lib/memory_store/integer_queue'
 
-module Storage
+module MemoryStore
   describe IntegerQueue do
 
     it_behaves_like 'an integer queue'

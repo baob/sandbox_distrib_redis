@@ -1,6 +1,6 @@
-require_relative '../../../lib/storage/primes_list'
+require_relative '../../../lib/memory_store/primes_list'
 
-module Storage
+module MemoryStore
   describe PrimesList do
 
     it_behaves_like 'common primes list behaviour'

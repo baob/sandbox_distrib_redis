@@ -1,5 +1,4 @@
 require 'primes_recurse'
-require 'storage/primes_list'
 
 describe PrimesRecurse do
 

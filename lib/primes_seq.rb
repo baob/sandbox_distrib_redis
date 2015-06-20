@@ -1,4 +1,4 @@
-require_relative 'storage/primes_list'
+require_relative 'memory_store'
 require_relative 'primes'
 
 class PrimesSeq

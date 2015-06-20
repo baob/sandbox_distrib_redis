@@ -1,4 +1,4 @@
-module Storage
+module MemoryStore
   class PrimesList
 
     def initialize(opts = {})
