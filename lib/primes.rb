@@ -12,6 +12,9 @@ module Primes
   end
 
   def is_prime?(candidate)
+    if candidate > biggest_test_possible
+      raise "candidate is #{candidate} but the biggest we can test is #{biggest_test_possible} because the max consecutive prime found is #{prime_list.max}"
+    end
     test_index = 0
     divisor_found = false
     divisors_to_try = prime_list.to_a
@@ -24,7 +27,9 @@ module Primes
       test_index += 1
     end
 
-    raise "last test_value #{test_value} when squared did not reach limit #{candidate}" unless divisor_found || test_value * test_value > candidate
+    unless divisor_found || test_value * test_value > candidate
+      raise "last test_value #{test_value} when squared did not reach limit #{candidate}"
+    end
 
     !divisor_found
   end
@@ -63,8 +68,8 @@ module Primes
     @storage_model ||= Module.const_get(storage_model_name.to_s.split('_').map(&:capitalize).join)
   end
 
-  def list_model
-    @list_model = storage_model.send(list_model_name)
+  def list_model(value = nil, opts = {})
+    @list_model = storage_model.send(list_model_name, value, opts)
   end
 
   def biggest_test_possible

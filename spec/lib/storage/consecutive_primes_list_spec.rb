@@ -20,6 +20,10 @@ module Storage
         describe '#all_results' do
           specify { expect(subject.all_results).to eql(initial_list.sort) }
         end
+
+        describe '#largest_consecutive_test' do
+          specify { expect(subject.largest_consecutive_test).to eql(initial_list.max) }
+        end
       end
     end
 
@@ -39,6 +43,10 @@ module Storage
 
         describe '#all_results' do
           specify { expect(subject.all_results).to eql(initial_list.sort) }
+        end
+
+        describe '#largest_consecutive_test' do
+          specify { expect(subject.largest_consecutive_test).to eql(initial_list.max) }
         end
       end
 

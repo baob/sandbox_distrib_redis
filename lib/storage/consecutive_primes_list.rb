@@ -10,7 +10,8 @@ module Storage
       @consecutive_primes_list = @storage_model.primes_list(value, id: :consecutive_primes_list)
       @non_consecutive_tests = @storage_model.integer_queue(nil, id: :non_consecutive_tests)
       @non_consecutive_primes = @storage_model.integer_queue(nil, id: :non_consecutive_primes)
-      @largest_consecutive_test = @storage_model.integer(1, id: :largest_consecutive_test)
+      largest = @consecutive_primes_list.max || 1
+      @largest_consecutive_test = @storage_model.integer(largest, id: :largest_consecutive_test)
     end
 
     def <<(n)
