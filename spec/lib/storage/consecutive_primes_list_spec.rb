@@ -7,12 +7,30 @@ module Storage
 
     context 'when initialised' do
       subject do
+        described_class.new(initial_list)
+      end
+
+      context 'initialised with 2, 3' do
+        let(:initial_list) { [2, 3] }
+
+        describe '#to_a' do
+          specify { expect(subject.to_a).to eql(initial_list.sort) }
+        end
+
+        describe '#all_results' do
+          specify { expect(subject.all_results).to eql(initial_list.sort) }
+        end
+      end
+    end
+
+    context 'when initialised with nothing, then values added' do
+      subject do
         pl = described_class.new
         initial_list.each { |p| pl << p } unless initial_list.empty?
         pl
       end
 
-      context 'initialised with 3, 2' do
+      context 'values 3, 2' do
         let(:initial_list) { [3, 2] }
 
         describe '#to_a' do
@@ -24,7 +42,7 @@ module Storage
         end
       end
 
-      context 'initialised with 2, 3' do
+      context 'values 2, 3' do
         let(:initial_list) { [2, 3] }
 
         describe '#to_a' do

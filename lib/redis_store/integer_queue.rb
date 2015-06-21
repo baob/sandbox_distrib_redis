@@ -5,9 +5,12 @@ module RedisStore
 
     attr_reader :store_name
 
-    def initialize(opts = {})
+    def initialize(value = nil, opts = {})
       @store_name = opts[:id] || 'integer_queue'
       redis.del(store_name)
+      unless value.nil?
+        value.each { |v| self << v }
+      end
     end
 
     def <<(elem)

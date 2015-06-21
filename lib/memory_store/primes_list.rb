@@ -1,8 +1,8 @@
 module MemoryStore
   class PrimesList
 
-    def initialize(opts = {})
-      @array = []
+    def initialize(value = nil, opts = {})
+      @array = value.nil? ? [] : value
     end
 
     def to_a

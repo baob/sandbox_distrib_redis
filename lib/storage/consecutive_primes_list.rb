@@ -5,11 +5,11 @@ module Storage
 
   class ConsecutivePrimesList
 
-    def initialize(opts = {})
+    def initialize(value = nil, opts = {})
       @storage_model = opts[:storage_model] || MemoryStore
-      @consecutive_primes_list = @storage_model.primes_list(id: :consecutive_primes_list)
-      @non_consecutive_tests = @storage_model.integer_queue(id: :non_consecutive_tests)
-      @non_consecutive_primes = @storage_model.integer_queue(id: :non_consecutive_primes)
+      @consecutive_primes_list = @storage_model.primes_list(value, id: :consecutive_primes_list)
+      @non_consecutive_tests = @storage_model.integer_queue(nil, id: :non_consecutive_tests)
+      @non_consecutive_primes = @storage_model.integer_queue(nil, id: :non_consecutive_primes)
       @largest_consecutive_test = @storage_model.integer(1, id: :largest_consecutive_test)
     end
 

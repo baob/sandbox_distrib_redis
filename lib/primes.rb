@@ -50,8 +50,8 @@ module Primes
 
   private
 
-  def integer_queue(opts ={})
-    storage_model.integer_queue(opts)
+  def integer_queue(value = nil, opts ={})
+    storage_model.integer_queue(value, opts)
   end
 
   def integer(value, opts ={})

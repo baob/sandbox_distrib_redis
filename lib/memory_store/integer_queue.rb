@@ -1,8 +1,8 @@
 module MemoryStore
   class IntegerQueue
 
-    def initialize(opts ={})
-      @array = []
+    def initialize(value = nil, opts ={})
+      @array = value.nil? ? [] : value
     end
 
     def <<(elem)

@@ -4,20 +4,20 @@ require_relative 'memory_store/primes_list'
 
 module MemoryStore
 
-  def self.consecutive_primes_list(opts = {})
-    Storage::ConsecutivePrimesList.new(opts.merge(storage_model: MemoryStore))
+  def self.consecutive_primes_list(value = nil, opts = {})
+    Storage::ConsecutivePrimesList.new(value, opts.merge(storage_model: MemoryStore))
   end
 
   def self.integer(number, opts = {})
     IntegerStore.new(number, opts)
   end
 
-  def self.integer_queue(opts = {})
-    IntegerQueue.new(opts)
+  def self.integer_queue(value = nil, opts = {})
+    IntegerQueue.new(value, opts)
   end
 
-  def self.primes_list(opts = {})
-    PrimesList.new(opts)
+  def self.primes_list(value = nil, opts = {})
+    PrimesList.new(value, opts)
   end
 
 end
