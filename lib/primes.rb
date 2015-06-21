@@ -50,6 +50,14 @@ module Primes
 
   private
 
+  def integer_queue(opts ={})
+    storage_model.integer_queue(opts)
+  end
+
+  def integer(value, opts ={})
+    storage_model.integer(value, opts)
+  end
+
   def storage_model
     @storage_model ||= Module.const_get(storage_model_name.to_s.split('_').map(&:capitalize).join)
   end
