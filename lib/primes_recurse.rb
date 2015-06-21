@@ -10,15 +10,15 @@ class PrimesRecurse
   end
 
   def run(count)
-    @primes = list_model
-    INITIAL_PRIME_LIST.each { |n| @primes << n }
+    @prime_list =  list_model
+    INITIAL_PRIME_LIST.each { |n| prime_list << n }
     @input_count = storage_model.integer(count, id: :input_count)
 
     test = biggest_test_generated + 1
 
     make_new_test(test)
 
-    @primes.to_a
+    prime_list.to_a
   end
 
   def make_new_test(test)

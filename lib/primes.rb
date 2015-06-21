@@ -5,17 +5,16 @@ module Primes
 
   INITIAL_PRIME_LIST = [2].freeze
 
-  attr_reader :storage_model_name, :list_model_name
+  attr_reader :storage_model_name, :list_model_name, :prime_list
 
   def have_enough_results?
-    @primes.count >= @input_count.to_i
+    prime_list.count >= @input_count.to_i
   end
 
   def is_prime?(candidate)
     test_index = 0
-    test_value = nil
     divisor_found = false
-    divisors_to_try = @primes.to_a
+    divisors_to_try = prime_list.to_a
 
     while !divisor_found && test_index < divisors_to_try.count
       test_value = divisors_to_try[test_index]
@@ -39,14 +38,14 @@ module Primes
   end
 
   def result_is_prime(test)
-    if @primes.include?(test)
+    if prime_list.include?(test)
       raise "Primes#result_is_prime is adding #{test} again ... WHY ?"
     end
-    @primes << test
+    prime_list << test
   end
 
   def result_is_not_prime(test)
-    @primes.add_non_prime(test)
+    prime_list.add_non_prime(test)
   end
 
   private
@@ -60,7 +59,7 @@ module Primes
   end
 
   def biggest_test_possible
-    (@primes.max + 1)**2 - 1
+    (prime_list.max + 1)**2 - 1
   end
 
   def biggest_test_generated=(n)

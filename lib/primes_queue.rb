@@ -11,8 +11,8 @@ class PrimesQueue
   end
 
   def run(count)
-    @primes = list_model
-    INITIAL_PRIME_LIST.each { |n| @primes << n }
+    @prime_list =  list_model
+    INITIAL_PRIME_LIST.each { |n| prime_list << n }
     @input_count = storage_model.integer(count, id: :input_count)
 
     until have_enough_results?
@@ -20,7 +20,7 @@ class PrimesQueue
       run_queued_tests
     end
 
-    @primes.to_a
+    prime_list.to_a
   end
 
   def make_new_test(test)
