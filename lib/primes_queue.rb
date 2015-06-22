@@ -11,8 +11,7 @@ class PrimesQueue
   end
 
   def run(count)
-    @prime_list =  list_model
-    INITIAL_PRIME_LIST.each { |n| prime_list << n }
+    @prime_list = list_model(INITIAL_PRIME_LIST.dup, id: :prime_list)
     @input_count = integer(count, id: :input_count)
 
     until have_enough_results?
