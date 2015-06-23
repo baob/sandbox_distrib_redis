@@ -17,6 +17,12 @@ module MemoryStore
       @array.min
     end
 
+    def min_pop
+      result = min
+      delete(result)
+      result
+    end
+
     def count
       @array.count
     end

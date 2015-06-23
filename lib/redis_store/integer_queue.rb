@@ -38,6 +38,12 @@ module RedisStore
       redis.zrange(store_name, 0, 0).first.to_i
     end
 
+    def min_pop
+      result = min
+      delete(result)
+      result
+    end
+
     def last
       return nil if empty?
       redis.zrange(store_name, -1, -1).first.to_i
