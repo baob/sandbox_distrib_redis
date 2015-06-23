@@ -43,6 +43,15 @@ shared_examples 'an integer queue' do
       end
     end
 
+    describe '#min_pop' do
+      specify { expect(subject.min_pop).to be(initial_elements.min) }
+
+      specify 'deletes an element' do
+        subject.min_pop
+        expect(subject.to_a).to eql(initial_elements[1..-1])
+      end
+    end
+
     context 'and the initial elements are not in sequence' do
       let(:initial_elements) { [222, 33, 4] }
 
