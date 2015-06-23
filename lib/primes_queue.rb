@@ -22,6 +22,8 @@ class PrimesQueue
     prime_list.to_a
   end
 
+  private
+
   def make_new_test(test)
     return if have_enough_results?
     test_result = is_prime?(test)
@@ -45,8 +47,6 @@ class PrimesQueue
       @queued_tests.delete(test)
     end
   end
-
-  private
 
   def queue_more_tests_to(test_limit)
     test_start = biggest_test_generated + 1
