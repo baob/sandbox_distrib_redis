@@ -6,13 +6,13 @@ class PrimesQueue
   def initialize(opts = {})
     @list_model_name = opts[:list_model] || :consecutive_primes_list
     @storage_model_name = opts[:storage_model] || :memory_store
-    @biggest_test_generated = integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
-    @queued_tests = integer_queue(nil, id: :queued_tests)
   end
 
   def run(count)
     @prime_list = list_model(INITIAL_PRIME_LIST.dup, id: :prime_list)
     @input_count = integer(count, id: :input_count)
+    @biggest_test_generated = integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
+    @queued_tests = integer_queue(nil, id: :queued_tests)
 
     until have_enough_results?
       queue_some_tests
