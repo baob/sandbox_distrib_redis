@@ -37,26 +37,11 @@ module RedisStore
       redis.zrange(store_name, 0, -1).map(&:to_i)
     end
 
-    def min
-      return nil if empty?
-      redis.zrange(store_name, 0, 0).first.to_i
-    end
-
-    def min_pop
-      result = min
-      delete(result)
-      result
-    end
-
     def last
       return nil if empty?
       redis.zrange(store_name, -1, -1).first.to_i
     end
     alias_method :max, :last
-
-    def delete(elem)
-      redis.zrem(store_name, elem.to_s)
-    end
 
     def include?(elem)
       !redis.zrank(store_name, elem.to_s).nil?

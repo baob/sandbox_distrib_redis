@@ -22,10 +22,6 @@ shared_examples 'an integer queue' do
         specify { expect(subject.min).to be(initial_elements.min) }
       end
 
-      describe '#include' do
-        specify { expect(subject.include?(initial_elements.first)).to be_truthy }
-      end
-
       describe '#sort' do
         specify { expect(subject.sort).to eql(initial_elements.sort) }
       end
@@ -54,20 +50,12 @@ shared_examples 'an integer queue' do
         specify { expect(subject.to_a).to match_array(initial_elements) }
       end
 
-      describe '#sort' do
-        specify { expect(subject.sort).to eql(initial_elements.sort) }
-      end
-
       describe '#empty?' do
         specify { expect(subject.empty?).to be_falsey }
       end
 
       describe '#min' do
         specify { expect(subject.min).to be(initial_elements.min) }
-      end
-
-      describe '#include' do
-        specify { expect(subject.include?(initial_elements.first)).to be_truthy }
       end
 
       describe '#sort' do
