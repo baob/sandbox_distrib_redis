@@ -3,6 +3,8 @@ require 'storage/consecutive_primes_list'
 module Storage
   describe ConsecutivePrimesList do
 
+    it_behaves_like 'an integer list'
+
     it_behaves_like 'common primes list behaviour'
 
     context 'when initialised' do
