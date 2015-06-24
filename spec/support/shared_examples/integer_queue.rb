@@ -57,6 +57,38 @@ shared_examples 'an integer queue' do
       describe '#sort' do
         specify { expect(subject.sort).to eql(initial_elements.sort) }
       end
+
+      describe '#empty?' do
+        specify { expect(subject.empty?).to be_falsey }
+      end
+
+      describe '#min' do
+        specify { expect(subject.min).to be(initial_elements.min) }
+      end
+
+      describe '#include' do
+        specify { expect(subject.include?(initial_elements.first)).to be_truthy }
+      end
+
+      describe '#sort' do
+        specify { expect(subject.sort).to eql(initial_elements.sort) }
+      end
+
+      describe '#delete' do
+        specify 'deletes an element' do
+          subject.delete(initial_elements.first)
+          expect(subject.to_a).to match_array(initial_elements[1..-1])
+        end
+      end
+
+      describe '#min_pop' do
+        specify { expect(subject.min_pop).to be(initial_elements.min) }
+
+        specify 'deletes an element' do
+          subject.min_pop
+          expect(subject.to_a).to match_array(initial_elements[0..1])
+        end
+      end
     end
 
   end
