@@ -16,7 +16,7 @@ describe PrimesQueue do
         allow(MemoryStore).to receive(:integer_queue).with(anything, hash_including(id: :queued_tests)).and_return(queued_tests_model)
         allow(queued_tests_model).to receive(:<<).with(an_instance_of(Fixnum)).at_least(:once)
         allow(queued_tests_model).to receive(:count).and_return(1, 0)
-        allow(queued_tests_model).to receive(:min_pop).and_return(3)
+        allow(queued_tests_model).to receive(:pop).and_return(3)
       end
 
       it 'queues tests with #<<' do
@@ -29,8 +29,8 @@ describe PrimesQueue do
         subject.run(2)
       end
 
-      it 'dequeues queued tests with #min_pop' do
-        expect(queued_tests_model).to receive(:min_pop).and_return(3)
+      it 'dequeues queued tests with #pop' do
+        expect(queued_tests_model).to receive(:pop).and_return(3)
         subject.run(2)
       end
 

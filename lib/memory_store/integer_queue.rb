@@ -13,8 +13,7 @@ module MemoryStore
       @array.sort
     end
 
-    # NOTE: min_pop no longer implements min, it picks first
-    def min_pop
+    def pop
       result = @array.first
       @array.delete(result)
       result

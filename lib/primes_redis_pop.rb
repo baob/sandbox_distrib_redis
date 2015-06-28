@@ -42,7 +42,7 @@ class PrimesRedisPop
 
   def run_queued_tests
     while @queued_tests.count > 0
-      test = @queued_tests.min_pop
+      test = @queued_tests.pop
       make_new_test(test)
     end
   end

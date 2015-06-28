@@ -33,8 +33,7 @@ module RedisStore
       redis.lrange(store_name, 0, -1).map(&:to_i).sort
     end
 
-    # NOTE: min_pop no longer implements min, it picks first
-    def min_pop
+    def pop
       redis.lpop(store_name).to_i
     end
 
