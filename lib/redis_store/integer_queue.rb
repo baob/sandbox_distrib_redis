@@ -33,6 +33,10 @@ module RedisStore
       redis.lpop(store_name).to_i
     end
 
+    def bpop
+      redis.blpop(store_name).last.to_i
+    end
+
     def last
       return nil if empty?
       redis.zrange(store_name, -1, -1).first.to_i

@@ -14,6 +14,11 @@ class PrimesRedisPop
     @biggest_test_generated = integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     @queued_tests = integer_queue(nil, id: :queued_tests)
 
+    1.times do
+      fork do
+        run_queued_tests_with_blocking_pop
+      end
+    end
     until have_enough_results?
       queue_some_tests
       run_queued_tests
@@ -43,6 +48,13 @@ class PrimesRedisPop
   def run_queued_tests
     while @queued_tests.count > 0
       test = @queued_tests.pop
+      make_new_test(test)
+    end
+  end
+
+  def run_queued_tests_with_blocking_pop
+    while @queued_tests.count > 0
+      test = @queued_tests.bpop
       make_new_test(test)
     end
   end

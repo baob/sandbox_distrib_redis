@@ -17,6 +17,7 @@ describe PrimesRedisPop do
         allow(queued_tests_model).to receive(:<<).with(an_instance_of(Fixnum)).at_least(:once)
         allow(queued_tests_model).to receive(:count).and_return(1, 0)
         allow(queued_tests_model).to receive(:pop).and_return(3)
+        allow(queued_tests_model).to receive(:bpop).and_return(3)
       end
 
       it 'queues tests with #<<' do
