@@ -54,10 +54,6 @@ module RedisStore
       redis.zrem(store_name, elem.to_s)
     end
 
-    def include?(elem)
-      !redis.zrank(store_name, elem.to_s).nil?
-    end
-
     def [](index)
       return nil if empty?
       redis.zrange(store_name, index, index).first.to_i

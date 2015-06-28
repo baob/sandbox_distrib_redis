@@ -7,5 +7,7 @@ module MemoryStore
 
     it_behaves_like 'common primes list behaviour'
 
+    it_behaves_like 'a primes_list for non-consecutive elements'
+
   end
 end

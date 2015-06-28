@@ -39,9 +39,5 @@ module MemoryStore
       count == 0
     end
 
-    def include?(elem)
-      @array.include?(elem)
-    end
-
   end
 end

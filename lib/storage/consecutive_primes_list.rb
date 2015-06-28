@@ -8,8 +8,8 @@ module Storage
     def initialize(value = nil, opts = {})
       @storage_model = opts[:storage_model] || MemoryStore
       @consecutive_primes_list = @storage_model.primes_list(value, id: :consecutive_primes_list)
-      @non_consecutive_tests = @storage_model.integer_queue(nil, id: :non_consecutive_tests)
-      @non_consecutive_primes = @storage_model.integer_queue(nil, id: :non_consecutive_primes)
+      @non_consecutive_tests = @storage_model.primes_list(nil, id: :non_consecutive_tests)
+      @non_consecutive_primes = @storage_model.primes_list(nil, id: :non_consecutive_primes)
       largest = @consecutive_primes_list.max || 1
       @largest_consecutive_test = @storage_model.integer(largest, id: :largest_consecutive_test)
     end

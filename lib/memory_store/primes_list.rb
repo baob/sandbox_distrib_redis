@@ -9,6 +9,14 @@ module MemoryStore
       @array
     end
 
+    def sort(*args)
+      @array.sort(*args)
+    end
+
+    def min
+      sort.first
+    end
+
     def add_non_prime(n)
       nil
     end
@@ -19,6 +27,10 @@ module MemoryStore
 
     def count
       @array.count
+    end
+
+    def empty?
+      count == 0
     end
 
     def last
@@ -35,6 +47,10 @@ module MemoryStore
 
     def max
       @array.max
+    end
+
+    def delete(n)
+      @array.delete(n)
     end
 
   end

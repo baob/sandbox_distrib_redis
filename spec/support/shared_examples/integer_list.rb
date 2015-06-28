@@ -27,10 +27,6 @@ shared_examples 'an integer list' do
       specify { expect(subject.count).to eql(initial_elements.count) }
     end
 
-    describe '#include' do
-      specify { expect(subject.include?(initial_elements.first)).to be_truthy }
-    end
-
   end
 
 end

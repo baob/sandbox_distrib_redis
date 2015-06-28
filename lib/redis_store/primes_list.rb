@@ -37,6 +37,10 @@ module RedisStore
       redis.zrange(store_name, 0, -1).map(&:to_i)
     end
 
+    def min
+      redis.zrange(store_name, 0, 0).first.to_i
+    end
+
     def last
       return nil if empty?
       redis.zrange(store_name, -1, -1).first.to_i
