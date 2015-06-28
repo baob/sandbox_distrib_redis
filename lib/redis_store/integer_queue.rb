@@ -33,12 +33,6 @@ module RedisStore
       redis.lrange(store_name, 0, -1).map(&:to_i).sort
     end
 
-    # NOTE: min no longer implements min, it picks first
-    def min
-      return nil if empty?
-      redis.lrange(store_name, 0, 0).first.to_i
-    end
-
     # NOTE: min_pop no longer implements min, it picks first
     def min_pop
       redis.lpop(store_name).to_i

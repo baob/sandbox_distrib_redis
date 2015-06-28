@@ -8,10 +8,6 @@ shared_examples 'an integer queue' do
     context 'when 3 elements are added in sequence' do
       let(:initial_elements) { [2, 3, 4] }
 
-      describe '#min' do
-        specify { expect(subject.min).to be(initial_elements.min) }
-      end
-
       describe '#min_pop' do
         specify { expect(subject.min_pop).to be(initial_elements.min) }
 
