@@ -29,10 +29,6 @@ shared_examples 'an integer queue' do
         specify { expect(subject.empty?).to be_falsey }
       end
 
-      describe '#sort' do
-        specify { expect(subject.sort).to eql(initial_elements.sort) }
-      end
-
       describe '#pop' do
         specify { expect(subject.pop).to be(initial_elements.first) }
 

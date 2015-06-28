@@ -29,10 +29,6 @@ module RedisStore
       redis.lrange(store_name, 0, -1).map(&:to_i)
     end
 
-    def sort
-      redis.lrange(store_name, 0, -1).map(&:to_i).sort
-    end
-
     def pop
       redis.lpop(store_name).to_i
     end

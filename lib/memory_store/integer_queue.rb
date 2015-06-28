@@ -9,10 +9,6 @@ module MemoryStore
       @array << elem
     end
 
-    def sort
-      @array.sort
-    end
-
     def pop
       result = @array.first
       @array.delete(result)
