@@ -54,6 +54,13 @@ shared_examples 'a primes_list for non-consecutive elements' do
     describe '#min' do
       specify { expect(subject.min).to be(initial_elements.min) }
     end
+
+    describe '#delete' do
+      specify 'deletes an element' do
+        subject.delete(initial_elements.first)
+        expect(subject.to_a).to eql(initial_elements[1..-1])
+      end
+    end
   end
 
 end
