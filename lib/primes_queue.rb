@@ -42,9 +42,8 @@ class PrimesQueue
 
   def run_queued_tests
     while @queued_tests.count > 0
-      test = @queued_tests.min
+      test = @queued_tests.min_pop
       make_new_test(test)
-      @queued_tests.delete(test)
     end
   end
 

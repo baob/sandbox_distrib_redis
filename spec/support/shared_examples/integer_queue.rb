@@ -8,11 +8,8 @@ shared_examples 'an integer queue' do
     context 'when 3 elements are added in sequence' do
       let(:initial_elements) { [2, 3, 4] }
 
-      describe '#delete' do
-        specify 'deletes an element' do
-          subject.delete(initial_elements.first)
-          expect(subject.to_a).to eql(initial_elements[1..-1])
-        end
+      describe '#min' do
+        specify { expect(subject.min).to be(initial_elements.min) }
       end
 
       describe '#min_pop' do
@@ -36,27 +33,16 @@ shared_examples 'an integer queue' do
         specify { expect(subject.empty?).to be_falsey }
       end
 
-      describe '#min' do
-        specify { expect(subject.min).to be(initial_elements.min) }
-      end
-
       describe '#sort' do
         specify { expect(subject.sort).to eql(initial_elements.sort) }
       end
 
-      describe '#delete' do
-        specify 'deletes an element' do
-          subject.delete(initial_elements.first)
-          expect(subject.to_a).to match_array(initial_elements[1..-1])
-        end
-      end
-
       describe '#min_pop' do
-        specify { expect(subject.min_pop).to be(initial_elements.min) }
+        specify { expect(subject.min_pop).to be(initial_elements.first) }
 
         specify 'deletes an element' do
           subject.min_pop
-          expect(subject.to_a).to match_array(initial_elements[0..1])
+          expect(subject.to_a).to eql(initial_elements[1..-1])
         end
       end
     end

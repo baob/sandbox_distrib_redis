@@ -14,11 +14,11 @@ module RedisStore
     end
 
     def <<(elem)
-      redis.zadd(store_name, elem, elem.to_s)
+      redis.rpush(store_name, elem)
     end
 
     def count
-      redis.zcard(store_name)
+      redis.llen(store_name)
     end
 
     def empty?
@@ -26,22 +26,22 @@ module RedisStore
     end
 
     def to_a
-      sort
+      redis.lrange(store_name, 0, -1).map(&:to_i)
     end
 
     def sort
-      redis.zrange(store_name, 0, -1).map(&:to_i)
+      redis.lrange(store_name, 0, -1).map(&:to_i).sort
     end
 
+    # NOTE: min no longer implements min, it picks first
     def min
       return nil if empty?
-      redis.zrange(store_name, 0, 0).first.to_i
+      redis.lrange(store_name, 0, 0).first.to_i
     end
 
+    # NOTE: min_pop no longer implements min, it picks first
     def min_pop
-      result = min
-      delete(result)
-      result
+      redis.lpop(store_name).to_i
     end
 
     def last
@@ -49,10 +49,6 @@ module RedisStore
       redis.zrange(store_name, -1, -1).first.to_i
     end
     alias_method :max, :last
-
-    def delete(elem)
-      redis.zrem(store_name, elem.to_s)
-    end
 
     def [](index)
       return nil if empty?
