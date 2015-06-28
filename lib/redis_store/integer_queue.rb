@@ -34,7 +34,9 @@ module RedisStore
     end
 
     def bpop
-      redis.blpop(store_name).last.to_i
+      result = redis.blpop(store_name, 1)
+      return nil if result.nil?
+      result.last.to_i
     end
 
     def last

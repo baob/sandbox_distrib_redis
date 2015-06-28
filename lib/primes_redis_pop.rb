@@ -14,7 +14,7 @@ class PrimesRedisPop
     @biggest_test_generated = integer(INITIAL_PRIME_LIST.max, id: :biggest_test_generated)
     @queued_tests = integer_queue(nil, id: :queued_tests)
 
-    1.times do
+    10.times do
       fork do
         run_queued_tests_with_blocking_pop
       end
@@ -24,15 +24,28 @@ class PrimesRedisPop
       run_queued_tests
     end
 
-    prime_list.to_a
+    prime_list.to_a.take(count)
   end
 
   private
+
+  def dump_state(exception)
+    puts "-----------------------------------------------------"
+    puts "Exception: #{exception}"
+    puts "@prime_list: #{@prime_list.to_a}"
+    puts "@queued_tests: #{@queued_tests.to_a}"
+    prime_list.dump_state
+    puts "-----------------------------------------------------"
+  end
+
 
   def make_new_test(test)
     return if have_enough_results?
     test_result = is_prime?(test)
     store_result(test_result, test)
+  rescue => e
+    dump_state(e)
+    raise
   end
 
   def queue_some_tests
@@ -53,13 +66,18 @@ class PrimesRedisPop
   end
 
   def run_queued_tests_with_blocking_pop
-    while @queued_tests.count > 0
+    while true
       test = @queued_tests.bpop
-      make_new_test(test)
+      make_new_test(test) unless test.nil?
+      break if have_enough_results?
+      queue_some_tests if test.nil?
     end
   end
 
   def queue_more_tests_to(test_limit)
+    if test_limit > biggest_test_possible
+      raise "what ? why are we testing #{test_limit} when biggest_test_possible is #{biggest_test_possible}"
+    end
     test_start = biggest_test_generated + 1
 
     if test_limit >= test_start

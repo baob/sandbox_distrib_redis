@@ -14,6 +14,17 @@ module Storage
       @largest_consecutive_test = @storage_model.integer(largest, id: :largest_consecutive_test)
     end
 
+    def dump_state(exception = nil)
+      puts "-----------------------------------------------------"
+      puts "Exception: #{exception}" unless exception.nil?
+      puts "@consecutive_primes_list: #{@consecutive_primes_list.to_a}"
+      puts "@non_consecutive_primes: #{@non_consecutive_primes.to_a}"
+      puts "@non_consecutive_tests: #{@non_consecutive_tests.to_a}"
+      puts "@largest_consecutive_test: #{@largest_consecutive_test.to_i}"
+      puts "-----------------------------------------------------"
+    end
+
+
     def <<(n)
       add_new_prime(n)
       add_new_test(n)

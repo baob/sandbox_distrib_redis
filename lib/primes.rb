@@ -27,7 +27,7 @@ module Primes
       test_index += 1
     end
 
-    unless divisor_found || test_value * test_value > candidate
+    unless divisor_found || (test_value + 1)**2 -1 > candidate
       raise "last test_value #{test_value} when squared did not reach limit #{candidate}"
     end
 
